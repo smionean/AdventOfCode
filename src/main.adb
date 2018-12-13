@@ -4,6 +4,7 @@ with Ada.Command_Line;      use Ada.Command_Line;
 with Advent.Day1;
 with Advent.Day2;
 with Advent.Day3;
+with Advent.Day4;
 procedure Main is
 
    function Question_Reponse(Question : in String) return Unbounded_String is
@@ -50,11 +51,9 @@ begin
             tmp := Advent.Day2.puzzle_2("../data/j2p1.txt");
          end if;
        elsif Input = "3" then
-         Input := Question_Reponse("Donne le numero du puzzle :");
-         --if Input = "1" then
-            --  Input := Question_Reponse("Donne le fichier des donnees :");
-            tmp := Advent.Day3.puzzle_1("../data/j3p1.txt");
-         --end if;
+         tmp := Advent.Day3.puzzle_1("../data/j3p1.txt");
+      elsif Input = "4" then
+         tmp := Advent.Day4.puzzle_1("../data/j4p1.txt");
       end if;
 
 
