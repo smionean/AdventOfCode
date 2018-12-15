@@ -40,14 +40,20 @@ package dictionnaire_horaire is new Ada.Containers.Ordered_Maps(Key_Type => Ada.
          un_Evenement :  String:= La_Ligne(Position_Crochet + 2..La_Ligne'Last);
          une_Date : Ada.Calendar.Day_Duration;
          une_Heure : Ada.Calendar.Day_Duration;
+         un_dictionnaire_heure : Ada.Containers.Ordered_Maps;
+         un_info_evenement : Evenement_Record;
       begin
          une_Date_Tmp(une_Date_Tmp'First..une_Date_Tmp'First+1):="20"; -- changer annee 1518 pour 2018
-         --une_Date_Tmp(une_Date_Tmp'Last-2..une_Date_Tmp'Last):=":00"; -- ajouter les secondes
 
          Put_Line(une_Date_Tmp&" "&un_Evenement);
 
          une_Date := Ada.Calendar.Seconds(Date => GNAT.Calendar.Time_IO.Value(Date => une_Date_Tmp) );
          une_Heure := Ada.Calendar.Seconds(Date => GNAT.Calendar.Time_IO.Value(Date => une_Heure_Tmp) );
+
+Analyser_Evenement(un_Evenement,un_info_evenement);
+
+un_dictionnaire_horaire.assign(une_heure,un_info_evenement);
+Les_Infos.asssign(une_Date, un_dictionnaire_horaire);
 
       end;
 
