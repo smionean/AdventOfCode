@@ -5,6 +5,7 @@ with Advent.Day1;
 with Advent.Day2;
 with Advent.Day3;
 with Advent.Day4;
+with Advent.Day5;
 procedure Main is
 
    function Question_Reponse(Question : in String) return Unbounded_String is
@@ -54,6 +55,8 @@ begin
          tmp := Advent.Day3.puzzle_1("../data/j3p1.txt");
       elsif Input = "4" then
          tmp := Advent.Day4.puzzle_1("../data/j4p1.txt");
+      elsif Input = "5" then
+         tmp := Advent.Day5.puzzle_1("../data/j5p1.txt");
       end if;
 
 

@@ -153,7 +153,7 @@ package body Advent.Day2 is
             end if;
          end loop;
          Vecteur_ID.Replace_Element(Index    => i,
-                                          New_Item => Variable_Id_Data);
+                                    New_Item => Variable_Id_Data);
       end loop;
 
       Total_Diff := Vecteur_ID.Element(1).minimal_diff;
