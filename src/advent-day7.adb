@@ -10,8 +10,7 @@ package body Advent.Day7 is
          Nb_Branche : Natural := 0;
          Noeud_Completay : Boolean := False;
          Parents : String (1..26) := (others => '-');
-         Etape_1 : Character := '-';
-         Etape_2 : Character := '-';
+         Nb_Parents : Natural := 0;
       end record;
    
    type Donnees is array (Character range 'A'..'Z') of Noeud;
@@ -59,20 +58,12 @@ package body Advent.Day7 is
          begin
             A := Ligne(6);
             B := Ligne(37);
-            
-            -- plus ou moins utile
-            if Data(A).Etape_1 = '-' then
-               Data(A).Etape_1 := B;
-            elsif Data(A).Etape_1 > B then
-               Data(A).Etape_2 := Data(A).Etape_1;
-               Data(A).Etape_1 := B;
-            else
-               Data(A).Etape_2 := B;
-            end if;
-            -- fin
-            
-            Data(A).Branche(Character'Pos(B)-64) := B;
+          :Data(A).Branche(Character'Pos(B)-64) := B;
             Data(A).Nb_Branche := Data(A).Nb_Branche + 1;
+            
+          Data(B).Parents(Character'Pos(A)-64) := A;
+            Data(B).Nb_Parents := Data(B).Nb_Parents + 1;
+            
             
             if Premier = '-' then
                Premier := A;
