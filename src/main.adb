@@ -54,16 +54,24 @@ begin
             --  Input := Question_Reponse("Donne le fichier des donnees :");
             tmp := Advent.Day2.puzzle_2("../data/j2p1.txt");
          end if;
-       elsif Input = "3" then
+      elsif Input = "3" then
          tmp := Advent.Day3.puzzle_1("../data/j3p1.txt");
       elsif Input = "4" then
          tmp := Advent.Day4.puzzle_1("../data/j4p1.txt");
+      elsif Input = "04" then
+         tmp := Advent.Day4.puzzle_1("../data/j4p0.txt");
       elsif Input = "5" then
          tmp := Advent.Day5.puzzle_1("../data/j5p1.txt");
+      elsif Input = "05" then
+         tmp := Advent.Day5.puzzle_1("../data/j5p0.txt");
       elsif Input = "6" then
          tmp := Advent.Day6.puzzle_1("../data/j6p1.txt");
+      elsif Input = "06" then
+         tmp := Advent.Day6.puzzle_1("../data/j6p0.txt");
       elsif Input = "7" then
          tmp := Advent.Day7.puzzle_1("../data/j7p1.txt");
+      elsif Input = "07" then
+         tmp := Advent.Day7.puzzle_1("../data/j7p0.txt");
       end if;
 
 
