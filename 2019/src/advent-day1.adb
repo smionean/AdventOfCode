@@ -6,9 +6,22 @@ with Ada.Containers.Vectors;
 
 package body Advent.Day1 is
 
+	function calculer_carburant(Distance : in Integer) return Integer is
+		Reponse : Interger := 0;
+	begin
+		Reponse := Distance / 3 - 2;
+		if Reponse = 0 then
+			Reponse := 0;
+		end if;
+		return Reponse;
+	end calculer_carburant;
+	
+
    function puzzle_1(fichier : in String) return Integer is
       Input : File_Type;
       Valeur : Integer := 0;
+      Valeur_2 : Integer := 0;
+      Valeur_Initiale : Integer := 0;
       Somme : Integer := 0;
       Somme_2 : Integer := 0;
    begin
@@ -21,98 +34,27 @@ package body Advent.Day1 is
             Line : String := Get_Line (Input);
          begin
             --Put_Line(Line);
-            Valeur := Integer'Value (Line);
-            Valeur := Valeur / 3 - 2;
+            Valeur_Initiale := Integer'Value (Line);
+            Valeur := calculer_carburant(Valeur_Initiale);
             Put_Line(Valeur'Img);
             Somme := Somme + Valeur;
 
-
+						Valeur_2 := Valeur_Initiale;
+						loop
+							Valeur_2 := calculer_carburant(Valeur_2);
+							Somme_2 := Somme_2 + Valeur_2;
+							exit when Valeur_2 = 0;
+						end loop;
 
          end;
       end loop;
       Close(Input);
       Put_Line("Reponse 1.0 : " & Somme'Img);
-
+			Put_Line("Reponse 1.1 : " & Somme_2'Img);
 
 
       return Somme;
    end puzzle_1;
 
-
-   -- function puzzle_2(fichier : in String) return Integer is
-   --    package ensemble_type is new Ada.Containers.Ordered_Sets(Integer);
-   --    use ensemble_type;
-
-   --    package vecteur_type is new Ada.Containers.Vectors(Index_Type => Positive,
-   --                                                       Element_Type =>  Integer);
-   --    --use vecteur_type;
-
-
-   --    procedure Remplir_Vecteur(Fichier : in String; Vecteur : out vecteur_type.Vector) is
-   --       Input : File_Type;
-   --    begin
-   --       Open (File => Input,
-   --       Mode => In_File,
-   --       Name => fichier);
-   --       While not  End_Of_File (Input) Loop
-
-   --          declare
-   --             Line : String := Get_Line (Input);
-   --             Un_Nombre : String := Line(2..Line'Last);
-   --          begin
-   --             Put_Line(Line);
-   --             Vecteur.Append(Integer'Value (Line));
-   --          end;
-   --       end loop;
-   --       Close(Input);
-   --    end Remplir_Vecteur;
-
-   --    function Analyser (Vecteur : in vecteur_type.Vector; Somme : in out Integer; Ensemble :in out ensemble_type.Set ) return Boolean is
-
-   --    begin
-   --       Put_Line(" =============== ");
-   --       for I in 1..Vecteur.Last_Index loop
-   --          Put_Line(" - V : "&Vecteur.Element(I)'Img);
-   --          Somme := Somme + Vecteur.Element(I);
-
-   --          if not Ensemble.Is_Empty and Ensemble.Contains(Somme) then
-   --             Put_Line("Reponse puzzle 2 : "&Somme'Img);
-   --             return True;
-   --            --Trouvay := True;
-   --          else
-   --             --Put_Line(" - insert : "&Somme'Img);
-   --             Ensemble.Insert(Somme);
-   --          end if;
-
-
-   --       end loop;
-
-   --       return False;
-   --    end Analyser;
-
-
-
-   --    Input : File_Type;
-   --    Reponse : Integer := 0;
-   --    Nouvelle_Frequence : Integer := 0;
-   --    Ensemble : ensemble_type.Set;
-   --    Cursor : ensemble_type.Cursor;
-   --    Trouvay : Boolean := False;
-   --    Vecteur : vecteur_type.Vector;
-   -- begin
-   --    Remplir_Vecteur(Fichier => fichier, Vecteur => Vecteur);
-
-   --    loop
-   --       Trouvay := Analyser(Vecteur  => Vecteur,
-   --                           Somme    => Reponse,
-   --                           Ensemble => Ensemble);
-   --       exit when Trouvay;
-   --    end loop;
-
-
-
-   --    Put_Line("Reponse puzzle 2  : "&Reponse'Img);
-   --    return Reponse;
-   -- end puzzle_2;
 
 end Advent.Day1;
