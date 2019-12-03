@@ -1,7 +1,8 @@
 
 
-package Advent.Day1 is
+package Advent.Day2 is
 
 	function puzzle(fichier : in String) return Integer;
 
-end Advent.Day1;
+end Advent.Day2;
+

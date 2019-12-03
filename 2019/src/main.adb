@@ -37,7 +37,9 @@ begin
       exit when Input = "quit";
 
       if Input = "1" then
-         tmp := Advent.Day1.puzzle_1("../data/advent01.txt");
+         tmp := Advent.Day1.puzzle("../data/advent01.txt");
+      elif Input = "2" then
+         tmp := Advent.Day2.puzzle("../data/advent02.txt");
       end if;
 
 

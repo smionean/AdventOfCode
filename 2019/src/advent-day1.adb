@@ -1,9 +1,5 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
-with Ada.Containers.Ordered_Sets;
-with Ada.Containers.Vectors;
---  with Ada.Containers.Functional_Maps;
-
 package body Advent.Day1 is
 
 	function calculer_carburant(Distance : in Integer) return Integer is
@@ -17,7 +13,7 @@ package body Advent.Day1 is
 	end calculer_carburant;
 	
 
-   function puzzle_1(fichier : in String) return Integer is
+   function puzzle(fichier : in String) return Integer is
       Input : File_Type;
       Valeur : Integer := 0;
       Valeur_2 : Integer := 0;
@@ -54,7 +50,7 @@ package body Advent.Day1 is
 
 
       return Somme;
-   end puzzle_1;
+   end puzzle;
 
 
 end Advent.Day1;
