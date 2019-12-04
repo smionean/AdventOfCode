@@ -2,15 +2,15 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 package body Advent.Day1 is
 
-	function calculer_carburant(Distance : in Integer) return Integer is
-		Reponse : Interger := 0;
-	begin
-		Reponse := Distance / 3 - 2;
-		if Reponse = 0 then
-			Reponse := 0;
-		end if;
-		return Reponse;
-	end calculer_carburant;
+   function calculer_carburant(Distance : in Integer) return Integer is
+      Reponse : Integer := 0;
+   begin
+      Reponse := Distance / 3 - 2;
+      if Reponse = 0 then
+         Reponse := 0;
+      end if;
+      return Reponse;
+   end calculer_carburant;
 	
 
    function puzzle(fichier : in String) return Integer is
@@ -35,12 +35,12 @@ package body Advent.Day1 is
             Put_Line(Valeur'Img);
             Somme := Somme + Valeur;
 
-						Valeur_2 := Valeur_Initiale;
-						loop
-							Valeur_2 := calculer_carburant(Valeur_2);
-							Somme_2 := Somme_2 + Valeur_2;
-							exit when Valeur_2 = 0;
-						end loop;
+            Valeur_2 := Valeur_Initiale;
+            loop
+               Valeur_2 := calculer_carburant(Valeur_2);
+               Somme_2 := Somme_2 + Valeur_2;
+               exit when Valeur_2 = 0;
+            end loop;
 
          end;
       end loop;

@@ -20,15 +20,15 @@ package body Advent.Day2 is
          begin
             --Put_Line(Line);
 
-
+            null;
          end;
       end loop;
       Close(Input);
       Put_Line("Reponse 2.0 : " & Reponse'Img);
-			Put_Line("Reponse 2.1 : " & Reponse_2'Img);
+      Put_Line("Reponse 2.1 : " & Reponse_2'Img);
 
 
-      return Somme;
+      return Reponse;
    end puzzle;
 
 

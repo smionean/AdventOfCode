@@ -2,7 +2,7 @@ with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Command_Line;      use Ada.Command_Line;
 with Advent.Day1;
--- with Advent.Day2;
+with Advent.Day2;
 -- with Advent.Day3;
 -- with Advent.Day4;
 -- with Advent.Day5;
@@ -38,7 +38,7 @@ begin
 
       if Input = "1" then
          tmp := Advent.Day1.puzzle("../data/advent01.txt");
-      elif Input = "2" then
+      elsif Input = "2" then
          tmp := Advent.Day2.puzzle("../data/advent02.txt");
       end if;
 
