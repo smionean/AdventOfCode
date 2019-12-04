@@ -6,7 +6,7 @@ package body Advent.Day1 is
       Reponse : Integer := 0;
    begin
       Reponse := Distance / 3 - 2;
-      if Reponse = 0 then
+      if Reponse < 0 then
          Reponse := 0;
       end if;
       return Reponse;
