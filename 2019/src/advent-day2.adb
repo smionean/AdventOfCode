@@ -30,11 +30,11 @@ package body Advent.Day2 is
                                    
                                                                                         
    procedure Analyser(Vecteur_Intcode : in out vecteur_intcode_type.Vector) is
-   
+      i : Natural := 0;
    begin
-     Vecteur_Intcode.Replace_Element(1,12);
-     Vecteur_Intcode.Replace_Element(2,2)
-      for i in 1..Vecteur_Intcode.Last_Index loop
+      Vecteur_Intcode.Replace_Element(1,12);
+      Vecteur_Intcode.Replace_Element(2,2);
+      loop
          if Vecteur_Intcode.Element(i) = 1 then
             Vecteur_Intcode.Replace_Element(Vecteur_Intcode.Element(i+3),
                                         Vecteur_Intcode.Element(i+1)+Vecteur_Intcode.Element(i+2));
@@ -53,6 +53,9 @@ package body Advent.Day2 is
          elsif Vecteur_Intcode.Element(i) = 99 then
             exit;
          end if;
+         
+         i := i + 4;
+         exit when i > Vector_Intcode.Last_Index;
       end loop;
    end Analyser;
 
