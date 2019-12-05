@@ -55,7 +55,7 @@ package body Advent.Day2 is
          end if;
          
          i := i + 4;
-         exit when i > Vector_Intcode.Last_Index;
+         exit when i > Vecteur_Intcode.Last_Index;
       end loop;
    end Analyser;
 
@@ -78,13 +78,13 @@ package body Advent.Day2 is
          begin
             --Put_Line(Line);
             -- recuperer code
-            Position := Index(Line,",",Position_Precedente);
-            while Position <= Line'Length loop
-               Vecteur_Intcode.Append(Natural'Value(Line(Position_Precedente..Position)));
-               Position_Precedente := Position;
-               Position := Index(Line,",",Position_Precedente);
-            end loop;
-            
+            Position := Line'First;
+            for i in Line'Range loop
+               if Line(i) = "," or i=Line'Last then
+                 Vecteur_Intcode.Append(Natural'Value(Line(Position..i-1)));
+               end if;
+               Position := Position + 1;
+            end loop;        
          end;
       end loop;
       Close(Input);
