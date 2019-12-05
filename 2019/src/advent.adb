@@ -1,5 +1,5 @@
 package body advent is
-   procedure init
+   procedure init is
    begin
       null;
    end init;

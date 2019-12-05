@@ -1,4 +1,5 @@
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Strings.Fixed;  use Ada.Strings.Fixed;
 with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 with Ada.Containers.Vectors;
 
@@ -6,7 +7,7 @@ with Ada.Containers.Vectors;
 package body Advent.Day2 is
 
    package vecteur_intcode_type is new Ada.Containers.Vectors(Index_Type   => Positive,              
-                                                       Element_Type => Natural);
+                                                              Element_Type => Natural);
                                                        
                    
    procedure Appliquer_Operation_1(Position_Valeur_A : in Positive;
@@ -35,10 +36,13 @@ package body Advent.Day2 is
          if Vecteur_Intcode.Element(i) = 1 then
             Appliquer_Operation_1(Vecteur_Intcode.Element(i+1),
                                   Vecteur_Intcode.Element(i+2),
-                                  Vecteur_Intcode.Element(i),
+                                  Vecteur_Intcode.Element(i+3),
                                   Vecteur_Intcode);
          elsif Vecteur_Intcode.Element(i) = 2 then
-    
+            Appliquer_Operation_2(Vecteur_Intcode.Element(i+1),
+                                  Vecteur_Intcode.Element(i+2),
+                                  Vecteur_Intcode.Element(i+3),
+                                  Vecteur_Intcode);
          end if;
       end loop;
    end Analyser;
@@ -48,13 +52,13 @@ package body Advent.Day2 is
       Input : File_Type;
       Reponse : Integer := 0;
       Reponse_2 : Integer := 0;
-      Vecteur_Intcode : vecteur_intcode_type;
-      Position : Integer := 0;
-      Position_Precedente : Integer := 0;
+      Vecteur_Intcode : vecteur_intcode_type.Vector;
+      Position : Natural := 0;
+      Position_Precedente : Natural := 0;
    begin
       Open (File => Input,
-         Mode => In_File,
-         Name => fichier);
+            Mode => In_File,
+            Name => fichier);
       While not  End_Of_File (Input) Loop
 
          declare
@@ -70,7 +74,7 @@ package body Advent.Day2 is
             end loop;
             
             -- analyser code
-            Analyser(Vector_Intcode);
+            Analyser(Vecteur_Intcode);
             
          end;
       end loop;
