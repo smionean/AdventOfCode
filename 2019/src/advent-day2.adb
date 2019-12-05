@@ -74,22 +74,24 @@ package body Advent.Day2 is
       While not  End_Of_File (Input) Loop
 
          declare
-            Line : String := Get_Line (Input);
+            Line : String := Get_Line (Input)&",";
          begin
             --Put_Line(Line);
             -- recuperer code
             Position := Line'First;
             for i in Line'Range loop
-               if Line(i) = "," or i=Line'Last then
-                 Vecteur_Intcode.Append(Natural'Value(Line(Position..i-1)));
+               if Line(i) = ',' or i = Line'Last then
+                  --Put_Line(Line(Position..i-1));
+                  Vecteur_Intcode.Append(Natural'Value(Line(Position..i-1)));
+                  Position := i + 1;
                end if;
-               Position := Position + 1;
+               
             end loop;        
          end;
       end loop;
       Close(Input);
       -- analyser code
-      Analyser(Vecteur_Intcode);
+     Analyser(Vecteur_Intcode);
       Reponse := Vecteur_Intcode.Element(0);
       
       Put_Line("Reponse 2.0 : " & Reponse'Img);
