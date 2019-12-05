@@ -6,7 +6,7 @@ with Ada.Containers.Vectors;
 
 package body Advent.Day2 is
 
-   package vecteur_intcode_type is new Ada.Containers.Vectors(Index_Type   => Positive,              
+   package vecteur_intcode_type is new Ada.Containers.Vectors(Index_Type   => Natural,              
                                                               Element_Type => Natural);
                                                        
                    
@@ -32,17 +32,26 @@ package body Advent.Day2 is
    procedure Analyser(Vecteur_Intcode : in out vecteur_intcode_type.Vector) is
    
    begin
+     Vecteur_Intcode.Replace_Element(1,12);
+     Vecteur_Intcode.Replace_Element(2,2)
       for i in 1..Vecteur_Intcode.Last_Index loop
          if Vecteur_Intcode.Element(i) = 1 then
-            Appliquer_Operation_1(Vecteur_Intcode.Element(i+1),
-                                  Vecteur_Intcode.Element(i+2),
-                                  Vecteur_Intcode.Element(i+3),
-                                  Vecteur_Intcode);
+            Vecteur_Intcode.Replace_Element(Vecteur_Intcode.Element(i+3),
+                                        Vecteur_Intcode.Element(i+1)+Vecteur_Intcode.Element(i+2));
+          
+           -- Appliquer_Operation_1(Vecteur_Intcode.Element(i+1),
+           --                       Vecteur_Intcode.Element(i+2),
+           --                       Vecteur_Intcode.Element(i+3),
+           --                       Vecteur_Intcode);
          elsif Vecteur_Intcode.Element(i) = 2 then
-            Appliquer_Operation_2(Vecteur_Intcode.Element(i+1),
-                                  Vecteur_Intcode.Element(i+2),
-                                  Vecteur_Intcode.Element(i+3),
-                                  Vecteur_Intcode);
+            Vecteur_Intcode.Replace_Element(Vecteur_Intcode.Element(i+3),
+                                        Vecteur_Intcode.Element(i+1)*Vecteur_Intcode.Element(i+2));
+           -- Appliquer_Operation_2(Vecteur_Intcode.Element(i+1),
+           --                       Vecteur_Intcode.Element(i+2),
+           --                       Vecteur_Intcode.Element(i+3),
+           --                       Vecteur_Intcode);
+         elsif Vecteur_Intcode.Element(i) = 99 then
+            exit;
          end if;
       end loop;
    end Analyser;
@@ -73,12 +82,13 @@ package body Advent.Day2 is
                Position := Index(Line,",",Position_Precedente);
             end loop;
             
-            -- analyser code
-            Analyser(Vecteur_Intcode);
-            
          end;
       end loop;
       Close(Input);
+      -- analyser code
+      Analyser(Vecteur_Intcode);
+      Reponse := Vecteur_Intcode.Element(0);
+      
       Put_Line("Reponse 2.0 : " & Reponse'Img);
       Put_Line("Reponse 2.1 : " & Reponse_2'Img);
 
