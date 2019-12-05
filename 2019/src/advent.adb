@@ -1,3 +1,7 @@
 package body advent is
-null;
+   procedure init
+   begin
+      null;
+   end init;
+
 end advent;
