@@ -38,7 +38,7 @@ package body Advent.Day2 is
          if Vecteur_Intcode.Element(i) = 1 then
             Vecteur_Intcode.Replace_Element(Vecteur_Intcode.Element(i+3),
                                         Vecteur_Intcode.Element(i+1)+Vecteur_Intcode.Element(i+2));
-          
+             i:=i+4;
            -- Appliquer_Operation_1(Vecteur_Intcode.Element(i+1),
            --                       Vecteur_Intcode.Element(i+2),
            --                       Vecteur_Intcode.Element(i+3),
@@ -46,15 +46,17 @@ package body Advent.Day2 is
          elsif Vecteur_Intcode.Element(i) = 2 then
             Vecteur_Intcode.Replace_Element(Vecteur_Intcode.Element(i+3),
                                         Vecteur_Intcode.Element(i+1)*Vecteur_Intcode.Element(i+2));
+            i:=i+4;
            -- Appliquer_Operation_2(Vecteur_Intcode.Element(i+1),
            --                       Vecteur_Intcode.Element(i+2),
            --                       Vecteur_Intcode.Element(i+3),
            --                       Vecteur_Intcode);
          elsif Vecteur_Intcode.Element(i) = 99 then
             exit;
+         else
+            i:=i+1;
          end if;
          
-         i := i + 4;
          exit when i > Vecteur_Intcode.Last_Index;
       end loop;
    end Analyser;
