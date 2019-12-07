@@ -35,17 +35,7 @@ function puzzle(fichier : in String) return Integer is
             Line : String := Get_Line (Input);
          begin
             --Put_Line(Line);
-            Valeur_Initiale := Integer'Value (Line);
-            Valeur := calculer_carburant(Valeur_Initiale);
-            Put_Line(Valeur'Img);
-            Somme := Somme + Valeur;
-
-            Valeur_2 := Valeur_Initiale;
-            loop
-               Valeur_2 := calculer_carburant(Valeur_2);
-               Somme_2 := Somme_2 + Valeur_2;
-               exit when Valeur_2 = 0;
-            end loop;
+          null;
 
          end;
       end loop;

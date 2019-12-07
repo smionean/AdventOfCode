@@ -40,6 +40,8 @@ begin
          tmp := Advent.Day1.puzzle("../data/advent01.txt");
       elsif Input = "2" then
          tmp := Advent.Day2.puzzle("../data/advent02.txt");
+      elsif Input = "2a" then
+         tmp := Advent.Day2.puzzle("../data/advent02a.txt");
       end if;
 
 
