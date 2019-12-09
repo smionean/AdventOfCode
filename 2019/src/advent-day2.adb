@@ -43,12 +43,7 @@ package body Advent.Day2 is
          
          exit when i > Vecteur_Intcode.Last_Index;
       end loop;
-      
---        for x in Vecteur_Intcode.First_Index..Vecteur_Intcode.Last_Index loop
---           Put_Line(x'img&") "&   Vecteur_Intcode.Element(x)'img);
---        end loop;
-      
-      
+            
    end Analyser;
 
    
@@ -72,12 +67,10 @@ package body Advent.Day2 is
          declare
             Line : String := Get_Line (Input)&",";
          begin
-            --Put_Line(Line);
             -- recuperer code
             Position := Line'First;
             for i in Line'Range loop
                if Line(i) = ',' or i = Line'Last then
-                  --Put_Line(Line(Position..i-1));
                   Vecteur_Intcode_Initial.Append(Natural'Value(Line(Position..i-1)));
                   Position := i + 1;
                end if;
@@ -98,7 +91,6 @@ package body Advent.Day2 is
             Analyser(Nom             => Nom,
                      Verbe           => Verbe,
                      Vecteur_Intcode => Vecteur_Intcode);
-            Put_Line(Nom'Img&" "&Verbe'Img&" = "&Vecteur_Intcode.Element(0)'Img);
             if Vecteur_Intcode.Element(0) = 19690720 then
                Combi_Trouvee := True;
                N := Natural(Nom);
