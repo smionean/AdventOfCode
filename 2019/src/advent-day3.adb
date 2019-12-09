@@ -100,9 +100,9 @@ package body Advent.Day3 is
       Info_Panneaux : Liste_Panneau_Type(Lignes'First..Lignes'Last);
       Longueur : Natural := 0;
       X_MAX : Integer := 0;
-      X_MIN : Integer := 9_999_999;
+      X_MIN : Integer := Integer'Last;
       Y_MAX : Integer := 0;
-      Y_MIN : Integer := 9_999_999;
+      Y_MIN : Integer := Integer'Last;
    begin
       
       for I in Lignes'Range loop
@@ -139,13 +139,87 @@ package body Advent.Day3 is
       
    end Evaluer_Espace;
 
+   procedure Deplacer_Vers_Haut(Panneau : in out Dimension_2_Type;
+                                Position_Point : in out Info_Panneau_Record;
+                                Longueur : in Natural;
+                                Distance_M : in out Natural) is                          
+   begin
+      for i in Position_Point.Y .. Position_Point.Y+Longueur loop
+          
+         if Panneau (Position_Point.X , i) /= 'o' then
+            if Position_Point.X + i < Distance_M then
+               Distance_M := Position.X + i;
+            end if;
+         end if;
+         Panneau(Position_Point.X,i) := 'a';
+      end loop;
+      Position_Point.Y := Position_Point.Y + Longueur;
+   end Deplacer_Vers_Haut;              
+
+
+ procedure Deplacer_Vers_Bas(Panneau : in out Dimension_2_Type;
+                                Position_Point : in out Info_Panneau_Record;
+                                Longueur : in Natural;
+                                Distance_M : in out Natural) is                          
+   begin
+      for i in reverse Position_Point.Y .. Position_Point.Y-Longueur loop
+          
+         if Panneau (Position_Point.X , i) /= 'o' then
+            if Position_Point.X + i < Distance_M then
+               Distance_M := Position.X + i;
+            end if;
+         end if;
+         Panneau(Position_Point.X,i) := 'a';
+      end loop;
+      Position_Point.Y := Position_Point.Y - Longueur;
+   end Deplacer_Vers_Haut;              
+
+
+ procedure Deplacer_Vers_Droite(Panneau : in out Dimension_2_Type;
+                                Position_Point : in out Info_Panneau_Record;
+                                Longueur : in Natural;
+                                Distance_M : in out Natural) is                          
+
+   begin
+      for i in Position_Point.X .. Position_Point.X+Longueur loop
+          
+         if Panneau (i,Position_Point.Y) /= 'o' then
+            if Position_Point.Y + i < Distance_M then
+               Distance_M := Position.Y + i;
+            end if;
+         end if;
+         Panneau(i,Position_Point.Y) := 'a';
+      end loop;
+      Position_Point.X := Position_Point.X + Longueur;
+   end Deplacer_Vers_Haut;              
+
+ procedure Deplacer_Vers_Gauche(Panneau : in out Dimension_2_Type;
+                                Position_Point : in out Info_Panneau_Record;
+                                Longueur : in Natural;
+                                Distance_M : in out Natural) is                          
+   begin
+      for i in reverse Position_Point.X .. Position_Point.X-Longueur loop
+          
+         if Panneau (i,Position_Point.Y) /= 'o' then
+            if Position_Point.Y + i < Distance_M then
+               Distance_M := Position.Y + i;
+            end if;
+         end if;
+         Panneau(i,Position_Point.Y) := 'a';
+      end loop;
+      Position_Point.X := Position_Point.X - Longueur;
+   end Deplacer_Vers_Haut;              
+
+
    ------------------------------
    --
    ------------------------------
    function Analyser (Lignes : in Liste_Lignes_Type; 
                       Info_Panneau : in Info_Panneau_Record) return Integer is
-      Panneau : Dimension_2_Type (Info_Panneau.X_MIN .. Info_Panneau.X , Info_Panneau.Y_MIN .. Info_Panneau.Y);
+      Panneau : Dimension_2_Type (Info_Panneau.X_MIN .. Info_Panneau.X , Info_Panneau.Y_MIN .. Info_Panneau.Y) := (others => 'o', others => 'o');
       Info_Panneau_Analyse : Info_Panneau_Record;
+      Longueur : Natural := 0;
+      Distance_M : Natural := Natural'Last;
    begin
       
       for I in Lignes'Range loop
@@ -154,14 +228,14 @@ package body Advent.Day3 is
          for J in Lignes(I).First_Index..Lignes(I).Last_Index loop
             Longueur := Lignes(I).Element(J).Longueur;
             case Lignes(I).Element(J).Direction is
-               when Up => Info_Panneau_Analyse.Y := Info_Panneau_Analyse.Y + Longueur ;
-               when Down => Info_Panneau_Analyse.Y := Info_Panneau_Analyse.Y - Longueur ;
-               when Right => Info_Panneau_Analyse.X := Info_Panneau_Analyse.X + Longueur ;
-               when Left => Info_Panneau_Analyse.X := Info_Panneau_Analyse.X - Longueur ;
+               when Up => Info_Panneau_Analyse.Y := Deplacer_Vers_Haut(Panneau, Info_Panneau_Analyse, Longueur, Distance_M);
+               when Down => Info_Panneau_Analyse.Y := Deplacer_Vers_Bas(Panneau, Info_Panneau_Analyse, Longueur, Distance_M);
+               when Right => Deplacer_Vers_Droite(Panneau, Info_Panneau_Analyse, Longueur, Distance_M);
+               when Left => Info_Panneau_Analyse.X := Deplacer_Vers_Gauche(Panneau, Info_Panneau_Analyse, Longueur, Distance_M);
             end case; 
          end loop;         
       end loop;
-      
+      return Distance_M;
    end Analyser;
    
    
