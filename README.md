@@ -1,6 +1,6 @@
 # AdventOfCode
 
-Pour le calendrier de l'avent (https://adventofcode.com/)
+Défi du calendrier de l'avent (https://adventofcode.com/)
 
 On en profite pour réapprendre Ada! 
 
@@ -9,3 +9,6 @@ https://adventofcode.com/2018
 
 ## 2019
 https://adventofcode.com/2019
+
+## 2020
+https://adventofcode.com/2020
