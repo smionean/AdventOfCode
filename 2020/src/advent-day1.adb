@@ -1,3 +1,14 @@
+--------------------------------------------
+-- Défi Calnedrier de l'Avent 2020
+--   Advent Of Code Challenge 2020
+--
+-- https://adventofcode.com
+--
+-- Simon Beàn : https://github.com/smionean
+--
+-- Jour 1 / Day 1
+--------------------------------------------
+
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 with Ada.Containers.Vectors;
@@ -7,7 +18,6 @@ package body Advent.Day1 is
 
   package type_vector_data is new Ada.Containers.Vectors(Index_Type   => Natural,              
                                                          Element_Type => Natural);
-   
    
    function Sum_Is_2020 (A : in Natural; B : in Natural) return Boolean is
    begin
@@ -19,7 +29,7 @@ package body Advent.Day1 is
       return A + B + C = 2020;
    end Sum_Is_2020;
 
-   function Execute(fichier : in String) return Integer is
+   procedure Execute(fichier : in String) is
       Input : File_Type;
       Reponse : Integer := 0;
       Reponse_2 : Integer := 0;
@@ -55,7 +65,6 @@ package body Advent.Day1 is
             
       Put_Line("Reponse (part1) : " & Reponse'Img);
       Put_Line("Reponse (part2) : " & Reponse_2'Img);
-      return Reponse;
    end Execute;
 
 

@@ -2,7 +2,7 @@
 
 package Advent.Day3 is
 
-	function Execute(fichier : in String) return Integer;
+	procedure Execute(fichier : in String);
 
 end Advent.Day3;
 

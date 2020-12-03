@@ -1,8 +1,19 @@
+--------------------------------------------
+-- Défi Calnedrier de l'Avent 2020
+--   Advent Of Code Challenge 2020
+--
+-- https://adventofcode.com
+--
+-- Simon Beàn : https://github.com/smionean
+--
+--------------------------------------------
+
+
 with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Command_Line;      use Ada.Command_Line;
 with Advent.Day1;
--- with Advent.Day2;
+with Advent.Day2;
 -- with Advent.Day3;
 -- with Advent.Day4;
 -- with Advent.Day5;
@@ -24,28 +35,19 @@ procedure Main is
    end Question_Reponse;
 
    Input         : Unbounded_String;
-   --  Reponse       : String (1..128);
-   tmp : Natural := 0;
 begin
 
    loop
       Input := Question_Reponse("Donne le jour du defi (quit pour quitter):");
-      --Put_Line(To_String (Input));
-
-
 
       exit when Input = "quit";
 
       if Input = "1" then
-         tmp := Advent.Day1.Execute("../data/advent01.txt");
-      --elsif Input = "2" then
-      --   tmp := Advent.Day2.Execute("../data/advent02.txt");
-      --elsif Input = "2a" then
-      --   tmp := Advent.Day2.Execute("../data/advent02a.txt");
+         Advent.Day1.Execute("data/advent01.txt");
+      elsif Input = "2" then
+         Advent.Day2.Execute("data/advent02.txt");
       --elsif Input = "3" then
-      --   tmp := Advent.Day3.Execute("../data/advent03.txt");
-      --elsif Input = "3a" then
-      --   tmp := Advent.Day3.Execute("../data/advent03.txt");
+      --  Advent.Day3.Execute("../data/advent03.txt");
       end if;
 
 
