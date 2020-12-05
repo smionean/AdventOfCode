@@ -15,7 +15,7 @@ with Ada.Command_Line;      use Ada.Command_Line;
 with Advent.Day1;
 with Advent.Day2;
 with Advent.Day3;
--- with Advent.Day4;
+with Advent.Day4;
 -- with Advent.Day5;
 -- with Advent.Day6;
 -- with Advent.Day7;
@@ -47,7 +47,9 @@ begin
       elsif Input = "2" then
          Advent.Day2.Execute("data/advent02.txt");
       elsif Input = "3" then
-        Advent.Day3.Execute("data/advent03.txt");
+         Advent.Day3.Execute("data/advent03.txt");
+      elsif Input = "4" then
+         Advent.Day4.Execute("data/advent04.txt");
       end if;
 
 
