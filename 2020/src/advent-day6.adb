@@ -18,12 +18,14 @@ with Ada.Containers.Vectors;
 package body Advent.Day6 is
 
    type Question_Set is array (Character range 'a' .. 'z') of Boolean;
-   
+    type Question_Array is array (Character range 'a' .. 'z') of Natural;
    procedure Execute(fichier : in String) is
       Input : File_Type;
        Answer : Question_Set := (others => False);
+			 Answer_Sum : Question_Array := (others => 0);
+			 Line_Count : Natutal := 0;
       Yes_Answer : Integer := 0;
-      Reponse_2 : Integer := 0;
+      Everybody_Yes_Answer : Integer := 0;
    begin
       Open (File => Input,
          Mode => In_File,
@@ -39,13 +41,24 @@ package body Advent.Day6 is
                      Yes_Answer := Yes_Answer + 1;
                   end if;
                end loop;
+								 
+               for b of Answer_Sum loop
+                  if b = Line_Count then
+                     Everybody_Yes_Answer := Everybody_Yes_Answer + 1;
+                  end if;
+							end loop;								 
+								 
                --Reponse := Answer'Count
                Answer := (others => False);
+							 Answer_Sum := (others => 0);
+							 Line_Count := 0;
                
             else
+							Line_Count := Line_Count + 1;
                for c of Line loop
                   if Is_Letter(c) then
                      Answer(c) := True;
+										 Answer_Sum(c) := Answer_Sum(c) + 1;
                   end if;
                end loop;
                
@@ -59,11 +72,17 @@ package body Advent.Day6 is
             Yes_Answer := Yes_Answer + 1;
          end if;
       end loop;
+				
+			 for b of Answer_Sum loop
+                  if b = Line_Count then
+                     Everybody_Yes_Answer := Everybody_Yes_Answer + 1;
+                  end if;
+			end loop;	
       Close(Input);
 
             
       Put_Line("Reponse (part1) : " & Yes_Answer'Img);
-      Put_Line("Reponse (part2) : " & Reponse_2'Img);
+      Put_Line("Reponse (part2) : " & Everybody_Yes_Answer'Img);
    end Execute;
 
 
