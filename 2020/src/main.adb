@@ -51,7 +51,7 @@ begin
       elsif Input = "4" then
          Advent.Day4.Execute("data/advent04.txt");
       elsif Input = "5" then
-         Advent.Day4.Execute("data/advent05.txt");
+         Advent.Day5.Execute("data/advent05.txt");
       end if;
 
 
