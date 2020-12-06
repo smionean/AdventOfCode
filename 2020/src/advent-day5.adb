@@ -15,6 +15,13 @@ with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 
 package body Advent.Day5 is
    
+	type Airplane_Plan is array (range <> ) of natural;
+	
+	
+	procedure First_Half(Data : in out Airplane_Plan );
+	
+	procedure Last_Half(Data : in out Airplane_Plan );
+		
    procedure Execute(fichier : in String) is
       Input : File_Type;
 
