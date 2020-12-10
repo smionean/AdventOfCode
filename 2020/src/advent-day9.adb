@@ -28,6 +28,7 @@ package body Advent.Day9 is
 	 for W in First..Last loop
 	    if V /= W then
 	       if Data.Element(V)+Data.Element(W) = Value then
+		  
 		  return True;
 	       end if;
 	    end if;
@@ -35,13 +36,37 @@ package body Advent.Day9 is
       end loop;
       return False;
    end Is_Valid_Number;
+   
+   function Find_Position (Value : in Long_Long_Integer; 
+			   Data : in XMAS_Vector.Vector;
+			   First : in Natural;
+			   Last : in Natural;
+			   Last_Position : out Natural) return Boolean is
+      Sum : Long_Long_Integer := 0;
+   begin
+      for V in First..Last loop
+	 Sum := Sum + Data.Element(V);
+	 if Sum = Value then
+	    Last_Position := V;
+	    return True;
+	 elsif Sum > Value then
+	    return False;
+	 end if;
+      end loop;
+      return False;
+   end Find_Position;
 
 			    procedure Execute(fichier : in String) is
       Input : File_Type;
-      Reponse : Integer := 0;
-      Reponse_2 : Integer := 0;
+      Reponse_2 : Long_Long_Integer := 0;
       XMAS_Data : XMAS_Vector.Vector;
       Invalid_Number : Long_Long_Integer := 0;
+      Position : Natural := 0;
+      First_Position : Natural := 0;
+      Last_Position : Natural := 0;
+      Set_Found : Boolean := False;
+      Min : Long_Long_Integer := 0;
+      Max : Long_Long_Integer := 0;
    begin
       Open (File => Input,
          Mode => In_File,
@@ -60,10 +85,31 @@ package body Advent.Day9 is
 	 if not Is_Valid_Number(XMAS_Data.Element(C), XMAS_Data, C-25, C-1) then
 	    Put_Line("Reponse (part1) : " & XMAS_Data.Element(C)'Img);
 	    Invalid_Number := XMAS_Data.Element(C);
+	    Position := C;
 	    exit;
 	 end if;
       end loop;
       
+      for C in XMAS_Data.First_Index .. Position-1 loop
+	 if Find_Position(Invalid_Number,XMAS_Data, C, Position-1, Last_Position) then
+	    First_Position := C;
+	    Set_Found := True;
+	    exit;
+	 end if;
+      end loop;
+      
+      if Set_Found then
+	 Min := Invalid_Number;
+	 for C in First_Position..Last_Position loop
+	    if XMAS_Data.Element(C) < Min then 
+	       Min := XMAS_Data.Element(C);
+	    end if;
+	    if XMAS_Data.Element(C) > Max then
+	       Max := XMAS_Data.Element(C);
+	    end if;
+	 end loop;
+	 Reponse_2 := Min + Max;
+      end if;
       
       --Put_Line("Reponse (part1) : " & Reponse'Img);
       Put_Line("Reponse (part2) : " & Reponse_2'Img);
