@@ -20,6 +20,7 @@ with Advent.Day5;
 with Advent.Day6;
 --with Advent.Day7;
 with Advent.Day8;
+with Advent.Day9;
 
 procedure Main is
 
@@ -59,7 +60,9 @@ begin
 	 Put_Line("Sorry no solution for now.");
 	 --Advent.Day7.Execute("data/advent07.txt");
       elsif Input = "8" then
-         Advent.Day8.Execute("data/advent08.txt");
+	 Advent.Day8.Execute("data/advent08.txt");
+      elsif Input = "9" then
+         Advent.Day9.Execute("data/advent09.txt");
       end if;
 
 

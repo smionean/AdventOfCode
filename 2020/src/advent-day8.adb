@@ -6,7 +6,7 @@
 --
 -- Simon Beàn : https://github.com/smionean
 --
--- Jour 6 / Day 6
+-- Jour 8 / Day 8
 --------------------------------------------
 
 with Ada.Text_IO; use Ada.Text_IO;
