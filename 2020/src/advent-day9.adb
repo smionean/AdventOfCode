@@ -37,24 +37,28 @@ package body Advent.Day9 is
       return False;
    end Is_Valid_Number;
    
-   function Find_Position (Value : in Long_Long_Integer; 
+   function Find_Answer (Value : in Long_Long_Integer; 
 			   Data : in XMAS_Vector.Vector;
 			   First : in Natural;
 			   Last : in Natural;
-			   Last_Position : out Natural) return Boolean is
+			   Reponse : out Long_Long_Integer) return Boolean is
       Sum : Long_Long_Integer := 0;
+      Min : Long_Long_Integer := Value;
+      Max : Long_Long_Integer := 0;
    begin
       for V in First..Last loop
 	 Sum := Sum + Data.Element(V);
+	 Min := Long_Long_Integer'Min(Min, Data.Element(V));
+	 Max := Long_Long_Integer'Max(Max, Data.Element(V));
 	 if Sum = Value then
-	    Last_Position := V;
+	    Reponse := Min + Max;
 	    return True;
 	 elsif Sum > Value then
 	    return False;
 	 end if;
       end loop;
       return False;
-   end Find_Position;
+   end Find_Answer;
 
 			    procedure Execute(fichier : in String) is
       Input : File_Type;
@@ -91,27 +95,11 @@ package body Advent.Day9 is
       end loop;
       
       for C in XMAS_Data.First_Index .. Position-1 loop
-	 if Find_Position(Invalid_Number,XMAS_Data, C, Position-1, Last_Position) then
-	    First_Position := C;
-	    Set_Found := True;
+	 if Find_Answer(Invalid_Number,XMAS_Data, C, Position-1, Reponse_2) then
 	    exit;
 	 end if;
       end loop;
-      
-      if Set_Found then
-	 Min := Invalid_Number;
-	 for C in First_Position..Last_Position loop
-	    if XMAS_Data.Element(C) < Min then 
-	       Min := XMAS_Data.Element(C);
-	    end if;
-	    if XMAS_Data.Element(C) > Max then
-	       Max := XMAS_Data.Element(C);
-	    end if;
-	 end loop;
-	 Reponse_2 := Min + Max;
-      end if;
-      
-      --Put_Line("Reponse (part1) : " & Reponse'Img);
+          
       Put_Line("Reponse (part2) : " & Reponse_2'Img);
    end Execute;
 
