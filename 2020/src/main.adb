@@ -21,6 +21,8 @@ with Advent.Day6;
 --with Advent.Day7;
 with Advent.Day8;
 with Advent.Day9;
+with Advent.Day10;
+
 
 procedure Main is
 
@@ -62,7 +64,9 @@ begin
       elsif Input = "8" then
 	 Advent.Day8.Execute("data/advent08.txt");
       elsif Input = "9" then
-         Advent.Day9.Execute("data/advent09.txt");
+	 Advent.Day9.Execute("data/advent09.txt");
+      elsif Input = "10" then
+         Advent.Day10.Execute("data/advent10.txt");
       end if;
 
 
