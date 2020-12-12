@@ -1,7 +1,7 @@
 
 
-package Advent.Day6 is
+package Advent.Day_DEFIX is
 
    procedure Execute(fichier : in String);
 
-end Advent.Day6;
+end Advent.Day_DEFIX;

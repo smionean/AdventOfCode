@@ -1,19 +1,19 @@
 --------------------------------------------
--- DÈfi Calnedrier de l'Avent 2020
+-- D√©fi Calnedrier de l'Avent 2020
 --   Advent Of Code Challenge 2020
 --
 -- https://adventofcode.com
 --
--- Simon Be‡n : https://github.com/smionean
+-- Simon Be√†n : https://github.com/smionean
 --
--- Jour 6 / Day 6
+-- Jour _DEFIX / Day _DEFIX
 --------------------------------------------
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 with Ada.Containers.Vectors;
 
-package body Advent.Day6 is
+package body Advent.Day_DEFIX is
 
    procedure Execute(fichier : in String) is
       Input : File_Type;
@@ -39,4 +39,4 @@ package body Advent.Day6 is
    end Execute;
 
 
-end Advent.Day6;
+end Advent.Day_DEFIX;
