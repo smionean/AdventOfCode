@@ -42,9 +42,37 @@ package body Advent.Day12 is
    end Change_Direction;
    
    
+   --
+   procedure Rotate(Move : in Move_Type; Value : in Natural; Waypoint : in out Ferry_Type)  is
+      Rotation : Natural := Value mod 89; -- 90 degrees 
+      Left : Natural := 0;
+      Right : Natural := 0;
+   begin
+      case Move is
+      when L => Left := Value;
+      when R => Right := Value; 
+      end case;
+      
+      Rotation := ((Left-Right) mod 360) mod 89;
+      
+      case Rotation is
+      when 0 => null;
+      when 1 => 
+	 Waypoint := (Position_East_West => -Waypoint.Position_North_South, Position_North_South => Waypoint.Position_East_West);
+      when 2 => 
+	 Waypoint := (Position_East_West => -Waypoint.Position_East_West, Position_North_South => -Waypoint.Position_North_South);
+      when 3 => 
+	 Waypoint := (Position_East_West => Waypoint.Position_North_South, Position_North_South => -Waypoint.Position_East_West);
+      when others => null;
+      end case;
+           
+   end Rotate;
+   
    procedure Execute(fichier : in String) is
       Input : File_Type;
       Ferry : Ferry_Type;
+      Ferry_2 : Ferry_Type;
+      Waypoint : Ferry_Type := (Position_East_West => 10, Position_North_South => 1);
       Action : Action_Type := E;
       Direction : Direction_Type := E;
       Value : Natural := 0;
@@ -62,27 +90,52 @@ package body Advent.Day12 is
 	    Action := Action_Type'Value(Line(Line'First..Line'First));
 	    Value := Natural'Value(Line(Line'First+1..Line'Last));
 	    case Action is
-	    when N => Ferry.Position_North_South := Ferry.Position_North_South + Value;
-	    when S => Ferry.Position_North_South := Ferry.Position_North_South - Value;
-	    when E => Ferry.Position_East_West := Ferry.Position_East_West + Value;
-	    when W => Ferry.Position_East_West := Ferry.Position_East_West - Value;
+	    when N => 
+	       Ferry.Position_North_South := Ferry.Position_North_South + Value;
+	       Waypoint.Position_North_South := Waypoint.Position_North_South + Value;
+	       
+	    when S => 
+	       Ferry.Position_North_South := Ferry.Position_North_South - Value;
+	       Waypoint.Position_North_South := Waypoint.Position_North_South - Value;
+	       
+	    when E => 
+	       Ferry.Position_East_West := Ferry.Position_East_West + Value;
+	       Waypoint.Position_East_West := Waypoint.Position_East_West + Value;
+	       
+	    when W => 
+	       Ferry.Position_East_West := Ferry.Position_East_West - Value;
+	       Waypoint.Position_East_West := Waypoint.Position_East_West - Value;
+	       
 	    when L => 
 	       Direction := Change_Direction(Direction, L, Value);
+	       Rotate(L, Value, Waypoint);
+	       
 	    when R => 
 	       Direction := Change_Direction(Direction, R, Value);
-	    when F=> 
+	       Rotate(R, Value, Waypoint);
+	       
+	    when F=>      
 	       case Direction is
-	       when N => Ferry.Position_North_South := Ferry.Position_North_South + Value;
-	       when S => Ferry.Position_North_South := Ferry.Position_North_South - Value;
-	       when E => Ferry.Position_East_West := Ferry.Position_East_West + Value;
-	       when W => Ferry.Position_East_West := Ferry.Position_East_West - Value;
+	       when N => 
+		  Ferry.Position_North_South := Ferry.Position_North_South + Value;
+	       when S => 
+		  Ferry.Position_North_South := Ferry.Position_North_South - Value;
+	       when E => 
+		  Ferry.Position_East_West := Ferry.Position_East_West + Value;
+	       when W => 
+		  Ferry.Position_East_West := Ferry.Position_East_West - Value;
 	       end case;
+	       
+	       Ferry_2.Position_North_South := Ferry_2.Position_North_South + (Value * Waypoint.Position_North_South);
+	       Ferry_2.Position_East_West := Ferry_2.Position_East_West + (Value * Waypoint.Position_East_West);
+	       
 	    end case;
          end;
       end loop;
       Close(Input);
 
       Reponse := abs(Ferry.Position_East_West)+ abs(Ferry.Position_North_South);
+      Reponse_2 := abs(Ferry_2.Position_East_West)+ abs(Ferry_2.Position_North_South); 
       Put_Line("Reponse (part1) : " & Reponse'Img);
       Put_Line("Reponse (part2) : " & Reponse_2'Img);
    end Execute;
