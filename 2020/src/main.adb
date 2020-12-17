@@ -25,6 +25,7 @@ with Advent.Day10;
 --with Advent.Day11;
 with Advent.Day12;
 with Advent.Day13;
+with Advent.Day14;
 
 procedure Main is
 
@@ -75,7 +76,9 @@ begin
       elsif Input = "12" then
 	 Advent.Day12.Execute("data/advent12.txt");
       elsif Input = "13" then
-         Advent.Day13.Execute("data/advent13.txt");
+	 Advent.Day13.Execute("data/advent13.txt");
+      elsif Input = "14" then
+         Advent.Day14.Execute("data/advent14.txt");
       end if;
 
 
