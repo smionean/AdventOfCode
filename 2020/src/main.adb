@@ -26,6 +26,7 @@ with Advent.Day10;
 with Advent.Day12;
 with Advent.Day13;
 with Advent.Day14;
+with Advent.Day15;
 
 procedure Main is
 
@@ -41,7 +42,17 @@ procedure Main is
       return Input;
    end Question_Reponse;
 
+   function Change_Folder (Request : Boolean := False) Return String is
+   begin
+      if Request then
+	 return "../";
+      else
+	 return "";
+      end if;
+   end Change_Folder;
+
    Input         : Unbounded_String;
+   Do_I_Change_Folder : Boolean := False;
 begin
 
    loop
@@ -49,36 +60,42 @@ begin
 
       exit when Input = "quit";
 
+      if Input = "0" then
+	 Do_I_Change_Folder := True;
+      end if;
+
       if Input = "1" then
-         Advent.Day1.Execute("data/advent01.txt");
+         Advent.Day1.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent01.txt");
       elsif Input = "2" then
-         Advent.Day2.Execute("data/advent02.txt");
+         Advent.Day2.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent02.txt");
       elsif Input = "3" then
-         Advent.Day3.Execute("data/advent03.txt");
+         Advent.Day3.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent03.txt");
       elsif Input = "4" then
-         Advent.Day4.Execute("data/advent04.txt");
+         Advent.Day4.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent04.txt");
       elsif Input = "5" then
-         Advent.Day5.Execute("data/advent05.txt");
+         Advent.Day5.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent05.txt");
       elsif Input = "6" then
-         Advent.Day6.Execute("data/advent06.txt");
+         Advent.Day6.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent06.txt");
       elsif Input = "7" then
 	 Put_Line("Sorry no solution for now.");
-	 --Advent.Day7.Execute("data/advent07.txt");
+	 --Advent.Day7.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent07.txt");
       elsif Input = "8" then
-	 Advent.Day8.Execute("data/advent08.txt");
+	 Advent.Day8.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent08.txt");
       elsif Input = "9" then
-	 Advent.Day9.Execute("data/advent09.txt");
+	 Advent.Day9.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent09.txt");
       elsif Input = "10" then
-	 Advent.Day10.Execute("data/advent10.txt");
+	 Advent.Day10.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent10.txt");
       elsif Input = "11" then
 	 Put_Line("Sorry no time to think.");
-	 --Advent.Day11.Execute("data/advent11.txt");
+	 --Advent.Day11.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent11.txt");
       elsif Input = "12" then
-	 Advent.Day12.Execute("data/advent12.txt");
+	 Advent.Day12.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent12.txt");
       elsif Input = "13" then
-	 Advent.Day13.Execute("data/advent13.txt");
+	 Advent.Day13.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent13.txt");
       elsif Input = "14" then
-         Advent.Day14.Execute("data/advent14.txt");
+	 Advent.Day14.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent14.txt");
+      elsif Input = "15" then
+         Advent.Day15.Execute(Change_Folder(Do_I_Change_Folder)&"data/advent15.txt");
       end if;
 
 
