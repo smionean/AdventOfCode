@@ -2,8 +2,6 @@
 
 Défi du calendrier de l'avent (https://adventofcode.com/)
 
-On en profite pour réapprendre Ada! 
-
 ## 2018
 https://adventofcode.com/2018
 
@@ -15,3 +13,4 @@ https://adventofcode.com/2020
 
 ## 2021
 https://adventofcode.com/2021
+(#AdaAdevntOfCode21)
