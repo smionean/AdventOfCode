@@ -36,11 +36,15 @@ procedure Day_DEFIX is
       Close(Input);
 
             
-      Put_Line("Reponse (part1) : " & Reponse'Img);
-      Put_Line("Reponse (part2) : " & Reponse_2'Img);
+      Put_Line("Results (part1) : " & Reponse'Img);
+      Put_Line("Results (part2) : " & Reponse_2'Img);
    end Execute;
 
 begin
-   Execute("../data/test.txt");
-   Execute("../data/data.txt");
+   Put_Line("TEST");
+   Execute("data/test.txt");
+   
+   New_Line;
+   Put_Line("CHALLENGE DAY _DEFIX");
+   Execute("data/data.txt");
 end Day_DEFIX;
