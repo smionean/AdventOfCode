@@ -2,15 +2,7 @@
 
 Défi du calendrier de l'avent (https://adventofcode.com/)
 
-## 2018
-https://adventofcode.com/2018
-
-## 2019
-https://adventofcode.com/2019
-
-## 2020
-https://adventofcode.com/2020
-
-## 2021
-https://adventofcode.com/2021
-(#AdaAdventOfCode21)
+* [2018](https://github.com/smionean/AdventOfCode/tree/master/2018)
+* [2019](https://github.com/smionean/AdventOfCode/tree/master/2019)
+* [2020](https://github.com/smionean/AdventOfCode/tree/master/2020)
+* [2021](https://github.com/smionean/AdventOfCode/tree/master/2021)
