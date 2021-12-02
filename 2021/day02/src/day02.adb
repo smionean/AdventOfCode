@@ -18,9 +18,11 @@ with Ada.Containers.Vectors;
 
 procedure Day02 is
 
+   type Commande_Type is ( forward, up, down );
+
    procedure Execute(fichier : in String) is
       Input : File_Type;
-      Forward : Integer := 0;
+      Forward_Move : Integer := 0;
       Depth : Integer := 0;
       Depth_2 : Integer := 0;
       Reponse : Integer := 0;
@@ -35,24 +37,21 @@ procedure Day02 is
             Line : String := Get_Line (Input);
             Position : Natural := 0;
             Distance : Integer := 0;
+            Commande : Commande_Type;
          begin
             Position := Index (Line, " ", 1);
-            declare 
-               Commande : String := Line(1..Position-1);
-            begin
-               Distance := Integer'Value(Line(Position..Line'Length));
-               case Commande(1) is
-                  when 'f' => Forward := Forward + Distance; Depth_2 := Depth_2 + (Depth * Distance);
-                  when 'u' => Depth := Depth - Distance; 
-                  when 'd' => Depth := Depth + Distance; 
-                  when others => Put_Line("Commande inconnue : "&Commande);
-               end case;
-            end;
+            Commande := Commande_Type'Value(Line(1..Position-1));
+            Distance := Integer'Value(Line(Position..Line'Length));
+            case Commande is
+               when forward => Forward_Move := Forward_Move + Distance; Depth_2 := Depth_2 + (Depth * Distance);
+               when up => Depth := Depth - Distance; 
+               when down => Depth := Depth + Distance; 
+            end case;
          end;
       end loop;
       Close(Input);
-      Reponse := Forward * Depth;
-      Reponse_2 := Forward * Depth_2;
+      Reponse := Forward_Move * Depth;
+      Reponse_2 := Forward_Move * Depth_2;
             
       Put_Line("Results (part1) : " & Reponse'Img);
       Put_Line("Results (part2) : " & Reponse_2'Img);
