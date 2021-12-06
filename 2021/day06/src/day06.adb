@@ -49,7 +49,7 @@ procedure Day06 is
       end loop;
    end Parse;
    
-   function Create(Lanternfish_Population : in out Lanterfish_Population_Type; Days : in Natural := 80) return Long_Long_Natural is
+   function Simulate(Lanternfish_Population : in out Lanterfish_Population_Type; Days : in Natural := 80) return Long_Long_Natural is
       Days_Left : Natural := Days; 
       Lanternfish_Population_Next_Day : Lanterfish_Population_Type := (others => Long_Long_Natural'First);
       Sum : Long_Long_Natural := 0; 
@@ -82,7 +82,7 @@ procedure Day06 is
 	 end loop;
       
       return Sum;
-   end Create;
+   end Simulate;
    
    
    procedure Execute(fichier : in String) is
@@ -100,8 +100,8 @@ procedure Day06 is
             Line : String := Get_Line (Input);
          begin
 	    Parse(Line,Lanternfish_Population);
-	    Reponse := Create(Lanternfish_Population);
-	    Reponse_2 := Create(Lanternfish_Population,256-80);
+	    Reponse := Simulate(Lanternfish_Population);
+	    Reponse_2 := Simulate(Lanternfish_Population,256-80);
          end;
       end loop;
       Close(Input);
