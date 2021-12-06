@@ -144,21 +144,6 @@ procedure Day04 is
       return False;
    end Etampe;
    
-   function Joue(Jeton : in Natural; Vector_Carte : in out Type_Vector_Bingo.Vector) return Natural is
-     -- Carte : Type_Info_Bingo;
-      Est_Gagnant : Boolean := False;
-   begin
-      for I in Vector_Carte.Iterate loop
-         if Vector_Carte(I).Ensemble.Contains(Jeton) then
-            Est_Gagnant := Etampe(Vector_Carte(I).Carte, Jeton);
-            if Est_Gagnant then
-               return Type_Vector_Bingo.To_Index (I);
-            end if;
-         end if;
-      end loop;
-      return 0;
-   end Joue;
-   
    function Est_Dernier(Vector_Carte : in Type_Vector_Bingo.Vector) return Boolean is
       R : Boolean := True;
    begin
@@ -168,7 +153,7 @@ procedure Day04 is
       return R;
    end Est_Dernier;
    
-   function Joue_Total(Jeton : in Natural; Vector_Carte : in out Type_Vector_Bingo.Vector) return Natural is
+   function Joue(Jeton : in Natural; Vector_Carte : in out Type_Vector_Bingo.Vector; Joue_Total : in Boolean) return Natural is
      -- Carte : Type_Info_Bingo;
       Est_Gagnant : Boolean := False;
    begin
@@ -176,20 +161,20 @@ procedure Day04 is
          if Vector_Carte(I).Ensemble.Contains(Jeton) then
             Est_Gagnant := Etampe(Vector_Carte(I).Carte, Jeton);
 	    if Est_Gagnant then
-	       Vector_Carte(I).Gagnant := True;
-              -- return Type_Vector_Bingo.To_Index (I);
+	       if not Joue_Total then
+		  return Type_Vector_Bingo.To_Index (I);
+	       end if;
 	    end if;
 	    
-	    if Est_Dernier(Vector_Carte) then
+	    if Est_Dernier(Vector_Carte) and Joue_Total then
 	       return Type_Vector_Bingo.To_Index (I);
 	    end if;
+	    
          end if;
       end loop;
-      
-      
-     -- Est_Dernier(Vecteur_Carte_2)
       return 0;
-   end Joue_Total;
+   end Joue;
+   
    
    function Calcule_Carte(Vector_Carte : in Type_Vector_Bingo.Vector; Carte_Gagnante : in Natural) return Natural is
       Somme : Natural := 0;
@@ -275,7 +260,7 @@ procedure Day04 is
       Vecteur_Carte_2 := Vecteur_Carte.Copy;
       
       for Jeton of Vecteur_Sequence loop
-         Carte_Gagnante := Joue(Jeton,Vecteur_Carte);
+         Carte_Gagnante := Joue(Jeton,Vecteur_Carte, false);
          if Carte_Gagnante /= 0 then
             Numero_Gagnant := Jeton;
             Exit;
@@ -289,7 +274,7 @@ procedure Day04 is
 
       Numero_Gagnant:=0;Carte_Gagnante:=0;
       for Jeton of Vecteur_Sequence loop
-         Carte_Gagnante := Joue_Total(Jeton,Vecteur_Carte_2);
+         Carte_Gagnante := Joue(Jeton,Vecteur_Carte_2, true);
          if Carte_Gagnante /= 0 then
 	    Numero_Gagnant := Jeton;
 	   -- if Est_Dernier(Vecteur_Carte_2) then
