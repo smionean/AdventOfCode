@@ -26,35 +26,17 @@ procedure Day08 is
    Seperator : constant Character_Set := To_Set ('|');
    Space : constant Character_Set := To_Set (' ');
    
-   type Signal_Type is (a,b,c,d,e,f,g);
-   
-   -- T TL TR M BL BR B
-   -- 
-   
-   --type Binaire is mod 2;
-   
+   type Signal_Type is (a,b,c,d,e,f,g);   
    type Position_Type is (T, TL, TR, M, BL, BR, B);
    type Position_Array_Type is array (Position_Type) of Signal_Type;
    
    
    type Display_Type is (zero, one, two, three, four, five, six, seven, eight, nine);
-   
-   type Digit_Array_Type is array (1..7) of Signal_Type;
-   
+      
    type Output_Display_Array is array (Display_Type) of Unbounded_String;  
-   --type Position_Display_Array is array (Display_Type) of Position_Array_Type; 
-   
-   
-   --type Dimension is (6,2,5,5,4,5,6,3,7,6);
-   --Position_Array_Type
+
    package Signals_Vector is new Ada.Containers.Vectors(Index_Type   => Positive,              
 							Element_Type => Unbounded_String);
-   
-   package Outputs_Vector is new Ada.Containers.Vectors(Index_Type   => Positive,              
-							Element_Type => Digit_Array_Type);
-   
-   
-   
    
    procedure Parse(A_String : in String; Signals : in out Unbounded_String; Outputs : in out Unbounded_String  ) is
       F   : Positive;
@@ -367,9 +349,7 @@ procedure Day08 is
 	    Decode_Table(two) := K;
 	 end if;
       end loop;
-      
-      New_Line;
-      
+ 
       F := 1;
       L := 0;
       I := 1;
