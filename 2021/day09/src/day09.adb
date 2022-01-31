@@ -1,12 +1,12 @@
 --------------------------------------------
--- DÈfi Calnedrier de l'Avent 2021
+-- D√©fi Calnedrier de l'Avent 2021
 --   Advent Of Code Challenge 2021
 --
 -- #AdaAdventOfCode21
 --
 -- https://adventofcode.com
 --
--- Simon Be‡n : https://github.com/smionean
+-- Simon Be√†n : https://github.com/smionean
 --
 -- Jour 09 / Day 09
 --------------------------------------------
