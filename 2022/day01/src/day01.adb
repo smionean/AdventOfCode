@@ -41,59 +41,12 @@ with Ada.Containers.Vectors;
 
 procedure Day01 is
 
-   procedure Execute(fichier : in String) is
-      Input : File_Type;
-      Max_Calories : Natural := 0;
-      Max_Calories_2 : Natural := 0;
-      Max_Calories_3 : Natural := 0;
-      Calories_Count : Natural := 0;
-      Elf_With_Max : Natural := 0;
-      Elf_With_Max_2 : Natural := 0;
-      Elf_With_Max_3 : Natural := 0;
-      Elf_Id : Positive := 1; 
-      Reponse_2 : Integer := 0;
+   procedure Process(Max_Calories, Max_Calories_2, Max_Calories_3 : in out Natural;
+                     Elf_With_Max, Elf_With_Max_2, Elf_With_Max_3 : in out Positive;
+                     Calories_Count : in out Natural;
+                     Elf_Id : in out Positive) is
+   
    begin
-      Open (File => Input,
-         Mode => In_File,
-            Name => fichier);
-      While not  End_Of_File (Input) Loop
-         declare
-            Line : String := Get_Line (Input);
-         begin
-            if Line /= "" then
-               Calories_Count := Calories_Count + Natural'Value(Line);
-            else
-               if Calories_Count > Max_Calories then
-                  Max_Calories_3 := Max_Calories_2;
-                  Max_Calories_2 := Max_Calories;
-                  Max_Calories := Calories_Count;
-
-                  Elf_With_Max_3 := Elf_With_Max_2;
-                  Elf_With_Max_2 := Elf_With_Max;
-                  Elf_With_Max := Elf_Id;
-               end if;
-
-               if Calories_Count > Max_Calories_2  and Calories_Count < Max_Calories then
-                  Max_Calories_3 := Max_Calories_2;
-                  Max_Calories_2 := Calories_Count;
-
-                  Elf_With_Max_3 := Elf_With_Max_2;
-                  Elf_With_Max_2 := Elf_Id;
-               end if;
-
-               if Calories_Count > Max_Calories_3 and Calories_Count < Max_Calories and Calories_Count < Max_Calories_2 then
-                  Max_Calories_3 := Calories_Count;
-
-                  Elf_With_Max_3 := Elf_Id;
-               end if;
-
-               Calories_Count := 0;
-               Elf_Id := Elf_Id + 1;
-            end if;
-         end;
-      end loop;
-      Close(Input);
-
       if Calories_Count > Max_Calories then
          Max_Calories_3 := Max_Calories_2;
          Max_Calories_2 := Max_Calories;
@@ -117,6 +70,57 @@ procedure Day01 is
 
          Elf_With_Max_3 := Elf_Id;
       end if;
+
+      Calories_Count := 0;
+      Elf_Id := Elf_Id + 1;
+   end Process;
+
+   procedure Execute(fichier : in String) is
+      Input : File_Type;
+      Max_Calories : Natural := 0;
+      Max_Calories_2 : Natural := 0;
+      Max_Calories_3 : Natural := 0;
+      Calories_Count : Natural := 0;
+      Elf_With_Max : Positive := 1;
+      Elf_With_Max_2 : Positive := 1;
+      Elf_With_Max_3 : Positive := 1;
+      Elf_Id : Positive := 1; 
+      Reponse_2 : Integer := 0;
+   begin
+      Open (File => Input,
+         Mode => In_File,
+            Name => fichier);
+      While not  End_Of_File (Input) Loop
+         declare
+            Line : String := Get_Line (Input);
+         begin
+            if Line /= "" then
+               Calories_Count := Calories_Count + Natural'Value(Line);
+            else
+               Process(Max_Calories => Max_Calories,
+                       Max_Calories_2 => Max_Calories_2,
+                       Max_Calories_3 => Max_Calories_3,
+                       Elf_With_Max => Elf_With_Max,
+                       Elf_With_Max_2 => Elf_With_Max_2,
+                       Elf_With_Max_3 => Elf_With_Max_3,
+                       Elf_Id => Elf_Id,
+                       Calories_Count => Calories_Count
+                       );
+               
+            end if;
+         end;
+      end loop;
+      Close(Input);
+
+      Process(Max_Calories => Max_Calories,
+            Max_Calories_2 => Max_Calories_2,
+            Max_Calories_3 => Max_Calories_3,
+            Elf_With_Max => Elf_With_Max,
+            Elf_With_Max_2 => Elf_With_Max_2,
+            Elf_With_Max_3 => Elf_With_Max_3,
+            Elf_Id => Elf_Id,
+            Calories_Count => Calories_Count
+            );
 
       Reponse_2 := Max_Calories + Max_Calories_2 + Max_Calories_3;
       Put_Line("Results (part1) : " & Max_Calories'Img & " (elf : " & Elf_With_Max'Img & " )");
