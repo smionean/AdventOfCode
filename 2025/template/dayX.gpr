@@ -1,0 +1,6 @@
+project day_DEFIX is
+    for Source_Dirs use ("src");
+    for Object_Dir use "obj";
+    for Main use ("day_DEFIX.adb");
+    for Create_Missing_Dirs use "true";
+end day_DEFIX;
