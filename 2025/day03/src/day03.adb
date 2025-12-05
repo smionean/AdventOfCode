@@ -25,24 +25,65 @@
 --|
 --+-------------------------------------------------------------------------+--
 
-with Ada.Text_IO;              use Ada.Text_IO;
-with Ada.Text_IO.Text_Streams; use Ada.Text_IO.Text_Streams;
-with Ada.Containers.Vectors;
+with Ada.Text_IO;                           use Ada.Text_IO;
+with Ada.Text_IO.Text_Streams;              use Ada.Text_IO.Text_Streams;
+with Ada.Numerics.Big_Numbers.Big_Integers;
+use Ada.Numerics.Big_Numbers.Big_Integers;
 
 procedure Day03 is
-
    procedure Execute (fichier : in String) is
       Input     : File_Type;
       Reponse   : Integer := 0;
-      Reponse_2 : Integer := 0;
+      Reponse_2 : Big_Natural := 0;
    begin
       Open (File => Input, Mode => In_File, Name => fichier);
       -- Get Data
       while not End_Of_File (Input) loop
          declare
-            Line : String := Get_Line (Input);
+            Line         : String := Get_Line (Input);
+            Joltage      : String (1 .. 2) := "00";
+            Joltage_12   : String (1 .. 12) := "000000000000";
+            Battery      : String (1 .. 1) := "0";
+            Max_Position : Natural := 1;
+            Length       : Natural := 0;
          begin
-            null;
+            -- A --
+            for C in 1 .. Line'Last - 1 loop
+               Battery (1) := Line (C);
+               if Integer'Value (Battery) > Integer'Value (Joltage (1 .. 1))
+               then
+                  Joltage (1 .. 1) := Battery;
+                  Max_Position := C;
+               end if;
+            end loop;
+
+            for C in Max_Position + 1 .. Line'Last loop
+               Battery (1) := Line (C);
+               if Integer'Value (Battery) > Integer'Value (Joltage (2 .. 2))
+               then
+                  Joltage (2 .. 2) := Battery;
+                  Max_Position := C;
+               end if;
+            end loop;
+            Reponse := Reponse + Integer'Value (Joltage);
+
+            -- B --
+            Max_Position := 0;
+            for J in Joltage_12'Range loop
+               for C in Max_Position + 1 .. Line'Last - (12 - J) loop
+                  Battery (1) := Line (C);
+                  if Integer'Value (Battery)
+                    > Integer'Value (Joltage_12 (J .. J))
+                  then
+                     Joltage_12 (J .. J) := Battery;
+                     Max_Position := C;
+                  end if;
+               end loop;
+            end loop;
+
+            -- Put_Line (Joltage_12);
+            Reponse_2 := Reponse_2 + From_String (Joltage_12);
+
          end;
       end loop;
       Close (Input);

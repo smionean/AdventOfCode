@@ -3,3 +3,7 @@
 2018/obj
 2021/day03/src/day01.code-workspace
 2021/day01/.vscode/tasks.json
+.DS_Store
+2024/day*/obj
+2025/day*/obj
+
