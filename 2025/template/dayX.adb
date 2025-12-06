@@ -57,5 +57,5 @@ begin
 
    New_Line;
    Put_Line ("CHALLENGE DAY _DEFIX");
-   Execute ("data/data.txt");
+   Execute ("data/input.txt");
 end Day_DEFIX;

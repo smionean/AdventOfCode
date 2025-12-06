@@ -32,8 +32,6 @@ with Ada.Containers.Vectors;
 
 procedure Day04 is
 
-   type Type_Shelves is array (Natural range <>, Natural range <>) of Boolean;
-
    type Position_Type is record
       X : Natural := 0;
       Y : Natural := 0;
