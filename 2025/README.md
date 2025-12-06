@@ -3,7 +3,7 @@
 
 Pour créer le projet de la journée (exemple : jour 01)
 ```
-template/generate.sh 02
+template/generate.sh 01
 ```
 
 Pour compiler
