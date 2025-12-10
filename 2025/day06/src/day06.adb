@@ -42,8 +42,6 @@ procedure Day06 is
    Whitespace : constant Ada.Strings.Maps.Character_Set :=
      Ada.Strings.Maps.To_Set (' ');
 
-   type Operator_Type is ('*', '+');
-
    package Sheet_Vector is new
      Ada.Containers.Vectors (Index_Type => Natural, Element_Type => Natural);
 
